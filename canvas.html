@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>My Dungeon</title>
+        
+        <script>
+            ROOM_TRIES = 50;
+            SQUARE_SIZE = 15;
+        </script>
+        <script src="procGenDungeon.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded",
+                function() {
+                    document.getElementById("roomTriesVar").innerHTML = ROOM_TRIES;
+                    document.getElementById("squareSizeVar").innerHTML = SQUARE_SIZE;
+                            
+                    draw();
+                    document.getElementById("dungeon").addEventListener("click", function() { clearCanvas(); draw(); }, false);
+                    
+                    document.getElementById("roomTriesSlider").addEventListener("input",
+                        function() {
+                            ROOM_TRIES = document.getElementById("roomTriesSlider").value;
+                            document.getElementById("roomTriesVar").innerHTML = ROOM_TRIES;
+                        }
+                    , false);
+
+                    document.getElementById("squareSizeSlider").addEventListener("input",
+                        function() {
+                            SQUARE_SIZE = parseInt(document.getElementById("squareSizeSlider").value);
+                            MIN_ROOM_SIZE = 4 * SQUARE_SIZE;
+                            MAX_ROOM_ADDITION = 4 * SQUARE_SIZE;
+                            HEIGHT_WIDTH_DIFFERENCE = 2 * SQUARE_SIZE;
+                            document.getElementById("squareSizeVar").innerHTML = SQUARE_SIZE;
+                        }
+                    , false);
+                        
+                }, false);
+            
+        </script>
+        
+        <style type="text/css">
+            canvas { border: 1px solid black; }
+        </style>
+        
+    </head>
+    
+    <body>
+        <canvas id="dungeon" width="750" height="500"></canvas>
+        
+        <div id="varSliders">
+            <span id="roomTriesText">Maximum number of generated rooms</span>
+            <input id="roomTriesSlider" type="range" min="2" max="100" value="50" step="1" />
+            <span id="roomTriesVar"></span>
+            <br>
+            <span id="squareSizeText">Size of each square</span>
+            <input id="squareSizeSlider" type="range" min="5" max="30" value="15" step="5" />
+            <span id="squareSizeVar"></span>
+
+        </div>
+    </body>
+</html>
